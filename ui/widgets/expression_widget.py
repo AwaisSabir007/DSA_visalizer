@@ -19,33 +19,41 @@ class ExpressionWidget(QWidget):
     def init_ui(self):
         """Initialize the UI"""
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(20, 15, 20, 20)
+        layout.setSpacing(8)
         
         # Title
         title = QLabel("Expression Converter & Evaluator")
-        title.setFont(QFont("Arial", 18, QFont.Bold))
-        title.setStyleSheet(f"color: {COLORS['primary']};")
+        title.setFont(QFont("Arial", 32, QFont.Bold))
+        title.setStyleSheet(f"color: {COLORS['primary']}; padding: 0px; margin: 0px;")
         layout.addWidget(title)
         
         # Input
         input_layout = QHBoxLayout()
+        input_layout.setSpacing(8)
+        input_layout.setContentsMargins(0, 0, 0, 0)
         
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Infix expression (e.g., (A+B)*(C-D) or (3+5)*(2-1))")
+        self.input_field.setMinimumHeight(35)
         input_layout.addWidget(self.input_field)
         
         postfix_btn = QPushButton("To Postfix")
         postfix_btn.setStyleSheet(f"background-color: {COLORS['accent']};")
         postfix_btn.clicked.connect(self.convert_to_postfix)
+        postfix_btn.setMinimumHeight(35)
         input_layout.addWidget(postfix_btn)
         
         prefix_btn = QPushButton("To Prefix")
         prefix_btn.setStyleSheet(f"background-color: {COLORS['accent']};")
         prefix_btn.clicked.connect(self.convert_to_prefix)
+        prefix_btn.setMinimumHeight(35)
         input_layout.addWidget(prefix_btn)
         
         eval_btn = QPushButton("Evaluate Postfix")
         eval_btn.setStyleSheet(f"background-color: {COLORS['primary_dark']};")
         eval_btn.clicked.connect(self.evaluate_postfix)
+        eval_btn.setMinimumHeight(35)
         input_layout.addWidget(eval_btn)
         
         layout.addLayout(input_layout)
@@ -61,7 +69,7 @@ class ExpressionWidget(QWidget):
         layout.addWidget(QLabel("Conversion/Evaluation Steps:"))
         self.steps_text = QTextEdit()
         self.steps_text.setReadOnly(True)
-        layout.addWidget(self.steps_text)
+        layout.addWidget(self.steps_text, 1)
     
     def convert_to_postfix(self):
         """Convert infix to postfix"""

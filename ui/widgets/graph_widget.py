@@ -158,15 +158,18 @@ class GraphWidget(QWidget):
     def init_ui(self):
         """Initialize the UI"""
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(20, 15, 20, 20)
+        layout.setSpacing(8)
         
         # Title
         title = QLabel("Graph Visualizer")
-        title.setFont(QFont("Arial", 18, QFont.Bold))
-        title.setStyleSheet(f"color: {COLORS['primary']};")
+        title.setFont(QFont("Arial", 32, QFont.Bold))
+        title.setStyleSheet(f"color: {COLORS['primary']}; padding: 0px; margin: 0px;")
         layout.addWidget(title)
         
         # Top controls
         top_layout = QHBoxLayout()
+        top_layout.setSpacing(8)
         
         # Graph input
         self.graph_text = QTextEdit()
@@ -185,17 +188,21 @@ class GraphWidget(QWidget):
         
         # Right controls
         right_controls = QVBoxLayout()
+        right_controls.setSpacing(8)
         
         load_btn = QPushButton("Load Graph")
         load_btn.clicked.connect(self.load_graph)
+        load_btn.setMinimumHeight(35)
         right_controls.addWidget(load_btn)
         
         clear_btn = QPushButton("Clear Graph")
         clear_btn.clicked.connect(self.clear_graph)
+        clear_btn.setMinimumHeight(35)
         right_controls.addWidget(clear_btn)
         
         layout_btn = QPushButton("Auto Layout")
         layout_btn.clicked.connect(self.auto_layout)
+        layout_btn.setMinimumHeight(35)
         right_controls.addWidget(layout_btn)
         
         top_layout.addLayout(right_controls)
@@ -203,32 +210,39 @@ class GraphWidget(QWidget):
         
         # Search controls
         search_layout = QHBoxLayout()
+        search_layout.setSpacing(8)
+        search_layout.setContentsMargins(0, 0, 0, 0)
         
         self.start_input = QLineEdit()
         self.start_input.setPlaceholderText("Start node")
+        self.start_input.setMinimumHeight(35)
         search_layout.addWidget(self.start_input)
         
         self.goal_input = QLineEdit()
         self.goal_input.setPlaceholderText("Goal node")
+        self.goal_input.setMinimumHeight(35)
         search_layout.addWidget(self.goal_input)
         
         search_btn = QPushButton("Search (BFS/DFS)")
         search_btn.clicked.connect(self.search_graph)
+        search_btn.setMinimumHeight(35)
         search_layout.addWidget(search_btn)
         
         preorder_btn = QPushButton("Preorder DFS")
         preorder_btn.clicked.connect(self.show_preorder)
+        preorder_btn.setMinimumHeight(35)
         search_layout.addWidget(preorder_btn)
         
         postorder_btn = QPushButton("Postorder DFS")
         postorder_btn.clicked.connect(self.show_postorder)
+        postorder_btn.setMinimumHeight(35)
         search_layout.addWidget(postorder_btn)
         
         layout.addLayout(search_layout)
         
         # Canvas
         self.canvas = GraphCanvas()
-        layout.addWidget(self.canvas)
+        layout.addWidget(self.canvas, 1)
     
     def load_graph(self):
         """Load graph from text input"""

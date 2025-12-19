@@ -95,57 +95,70 @@ class QueueStackWidget(QWidget):
     def init_ui(self):
         """Initialize the UI"""
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(20, 15, 20, 20)
+        layout.setSpacing(8)
         
         # Title
         title = QLabel("Queue & Stack Simulator")
-        title.setFont(QFont("Arial", 18, QFont.Bold))
-        title.setStyleSheet(f"color: {COLORS['primary']};")
+        title.setFont(QFont("Arial", 32, QFont.Bold))
+        title.setStyleSheet(f"color: {COLORS['primary']}; padding: 0px; margin: 0px;")
         layout.addWidget(title)
         
         # Size input
         size_layout = QHBoxLayout()
+        size_layout.setSpacing(8)
         size_layout.addWidget(QLabel("Structure Size:"))
         self.size_input = QLineEdit()
         self.size_input.setPlaceholderText("e.g., 8")
         self.size_input.setMaximumWidth(100)
+        self.size_input.setMinimumHeight(35)
         size_layout.addWidget(self.size_input)
         create_btn = QPushButton("Create Structures")
         create_btn.clicked.connect(self.create_structures)
+        create_btn.setMinimumHeight(35)
         size_layout.addWidget(create_btn)
         size_layout.addStretch()
         layout.addLayout(size_layout)
         
         # Controls
         controls = QHBoxLayout()
+        controls.setSpacing(8)
+        controls.setContentsMargins(0, 0, 0, 0)
         
         self.value_input = QLineEdit()
         self.value_input.setPlaceholderText("Value")
+        self.value_input.setMinimumHeight(35)
         controls.addWidget(self.value_input)
         
         push_btn = QPushButton("Push (Stack)")
         push_btn.setStyleSheet(f"background-color: {COLORS['accent']};")
         push_btn.clicked.connect(self.stack_push)
+        push_btn.setMinimumHeight(35)
         controls.addWidget(push_btn)
         
         pop_btn = QPushButton("Pop (Stack)")
         pop_btn.setStyleSheet(f"background-color: {COLORS['warning']};")
         pop_btn.clicked.connect(self.stack_pop)
+        pop_btn.setMinimumHeight(35)
         controls.addWidget(pop_btn)
         
         enqueue_btn = QPushButton("Enqueue (Queue)")
         enqueue_btn.setStyleSheet(f"background-color: {COLORS['accent']};")
         enqueue_btn.clicked.connect(self.queue_enqueue)
+        enqueue_btn.setMinimumHeight(35)
         controls.addWidget(enqueue_btn)
         
         dequeue_btn = QPushButton("Dequeue (Queue)")
         dequeue_btn.setStyleSheet(f"background-color: {COLORS['warning']};")
         dequeue_btn.clicked.connect(self.queue_dequeue)
+        dequeue_btn.setMinimumHeight(35)
         controls.addWidget(dequeue_btn)
         
         layout.addLayout(controls)
         
         # Display area
         display_layout = QHBoxLayout()
+        display_layout.setSpacing(8)
         
         # Stack
         stack_group = QGroupBox("Stack (Top → Bottom)")
@@ -161,7 +174,7 @@ class QueueStackWidget(QWidget):
         queue_layout.addWidget(self.queue_canvas)
         display_layout.addWidget(queue_group)
         
-        layout.addLayout(display_layout)
+        layout.addLayout(display_layout, 1)
     
     def create_structures(self):
         """Create queue and stack with specified size"""

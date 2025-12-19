@@ -142,63 +142,80 @@ class BSTWidget(QWidget):
     def init_ui(self):
         """Initialize the UI"""
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(20, 15, 20, 20)
+        layout.setSpacing(8)  # Reduced spacing
         
         # Title
         title = QLabel("Binary Search Tree Visualizer")
-        title.setFont(QFont("Arial", 18, QFont.Bold))
-        title.setStyleSheet(f"color: {COLORS['primary']};")
+        title.setFont(QFont("Arial", 32, QFont.Bold))  # Larger font
+        title.setStyleSheet(f"color: {COLORS['primary']}; padding: 0px; margin: 0px;")
         layout.addWidget(title)
         
         # Controls
         controls = QHBoxLayout()
+        controls.setSpacing(8)
+        controls.setContentsMargins(0, 0, 0, 0)
         
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Enter integer value")
+        self.input_field.setMinimumHeight(35)
         controls.addWidget(self.input_field)
         
         insert_btn = QPushButton("Insert")
         insert_btn.clicked.connect(self.insert_node)
+        insert_btn.setMinimumHeight(35)
         controls.addWidget(insert_btn)
         
         delete_btn = QPushButton("Delete")
         delete_btn.clicked.connect(self.delete_node)
+        delete_btn.setMinimumHeight(35)
         controls.addWidget(delete_btn)
         
         search_btn = QPushButton("Search")
         search_btn.clicked.connect(self.search_node)
+        search_btn.setMinimumHeight(35)
         controls.addWidget(search_btn)
         
         clear_btn = QPushButton("Clear")
         clear_btn.clicked.connect(self.clear_tree)
+        clear_btn.setMinimumHeight(35)
         controls.addWidget(clear_btn)
         
         layout.addLayout(controls)
         
         # Traversal buttons
         traversal_layout = QHBoxLayout()
+        traversal_layout.setSpacing(8)
+        traversal_layout.setContentsMargins(0, 0, 0, 0)
         
         inorder_btn = QPushButton("Inorder")
         inorder_btn.clicked.connect(lambda: self.show_traversal("inorder"))
+        inorder_btn.setMinimumHeight(35)
         traversal_layout.addWidget(inorder_btn)
         
         preorder_btn = QPushButton("Preorder")
         preorder_btn.clicked.connect(lambda: self.show_traversal("preorder"))
+        preorder_btn.setMinimumHeight(35)
         traversal_layout.addWidget(preorder_btn)
         
         postorder_btn = QPushButton("Postorder")
         postorder_btn.clicked.connect(lambda: self.show_traversal("postorder"))
+        postorder_btn.setMinimumHeight(35)
         traversal_layout.addWidget(postorder_btn)
         
         inorder_code_btn = QPushButton("In Code")
         inorder_code_btn.clicked.connect(lambda: self.show_code("inorder"))
+        inorder_code_btn.setMinimumHeight(35)
         traversal_layout.addWidget(inorder_code_btn)
         
         preorder_code_btn = QPushButton("Pre Code")
         preorder_code_btn.clicked.connect(lambda: self.show_code("preorder"))
+        preorder_code_btn.setMinimumHeight(35)
         traversal_layout.addWidget(preorder_code_btn)
         
         postorder_code_btn = QPushButton("Post Code")
         postorder_code_btn.clicked.connect(lambda: self.show_code("postorder"))
+        postorder_code_btn.setMinimumHeight(35)
         traversal_layout.addWidget(postorder_code_btn)
         
         layout.addLayout(traversal_layout)
@@ -206,7 +223,7 @@ class BSTWidget(QWidget):
         # Canvas
         self.canvas = BSTCanvas()
         self.canvas.set_bst(self.bst)
-        layout.addWidget(self.canvas)
+        layout.addWidget(self.canvas, 1)  # Give canvas stretch factor
     
     def insert_node(self):
         """Insert a node into the BST"""
